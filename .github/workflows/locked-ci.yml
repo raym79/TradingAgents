@@ -2,7 +2,7 @@ name: Locked CI
 
 on:
   push:
-    branches: [main, 'local/main', 'update/**']
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-24.04, windows-2022]
     env:
       PYTHONUTF8: '1'
       TRADINGAGENTS_NO_UPDATE_CHECK: '1'

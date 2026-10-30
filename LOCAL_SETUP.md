@@ -81,7 +81,9 @@ a reviewed change, updating both the installer and CI's tool version together.
 ## CI, hosting, and promotion
 
 `.github/workflows/locked-ci.yml` verifies the lockfile, dependency consistency,
-lint, offline tests and CLI help on Windows and Linux with Python 3.12.10.
+lint, offline tests and CLI help on Windows Server 2022 and Ubuntu 24.04 with
+Python 3.12.10. Runner versions are explicit so a moving `*-latest` image cannot
+silently remove support for the pinned Python release.
 It installs a wheel rather than the editable source package. Actions use immutable
 commit pins and a read-only token. Upstream's workflows remain available as well.
 No live provider keys or brokerage credentials are needed for these checks.
@@ -97,8 +99,8 @@ Push changes to `origin`; retain `upstream` only for fetching original releases.
 The weekly schedule becomes eligible after the workflow reaches the fork's default
 branch and Actions is enabled. Inspect results under the fork's Actions tab.
 
-On your repository, require the `locked (ubuntu-latest)` and
-`locked (windows-latest)` checks and PR review on the default branch. Keep
+On your repository, require the `locked (ubuntu-24.04)` and
+`locked (windows-2022)` checks and PR review on the default branch. Keep
 automatic merging disabled for upstream updates. Confirm both hosted checks pass
 before promoting an update; a local Windows check alone does not certify Linux.
 
